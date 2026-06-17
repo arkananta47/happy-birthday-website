@@ -65,20 +65,50 @@ startBtn.addEventListener('click', () => {
     });
 
     // --- Hall of Fame Scroller ---
-    const scroller = document.getElementById('hall-of-fame-scroller');
-    const scrollLeftBtn = document.getElementById('scroll-left-btn');
-    const scrollRightBtn = document.getElementById('scroll-right-btn');
-    if (scroller && scrollLeftBtn && scrollRightBtn) {
-        const card = scroller.querySelector('.snap-center');
-        const cardWidth = card.offsetWidth + parseInt(getComputedStyle(card.parentElement).gap);
+const scroller = document.getElementById('hall-of-fame-scroller');
+const scrollLeftBtn = document.getElementById('scroll-left-btn');
+const scrollRightBtn = document.getElementById('scroll-right-btn');
 
-        scrollRightBtn.addEventListener('click', () => {
-            scroller.scrollBy({ left: cardWidth, behavior: 'smooth' });
-        });
-        scrollLeftBtn.addEventListener('click', () => {
-            scroller.scrollBy({ left: -cardWidth, behavior: 'smooth' });
-        });
+if (scroller && scrollLeftBtn && scrollRightBtn) {
+    const card = scroller.querySelector('.snap-center');
+    const cardWidth =
+        card.offsetWidth +
+        parseInt(getComputedStyle(card.parentElement).gap);
+
+    function updateButtons() {
+        const maxScroll = scroller.scrollWidth - scroller.clientWidth;
+
+        scrollLeftBtn.style.opacity =
+            scroller.scrollLeft <= 10 ? '0.3' : '1';
+
+        scrollRightBtn.style.opacity =
+            scroller.scrollLeft >= maxScroll - 10 ? '0.3' : '1';
     }
+
+    scrollRightBtn.addEventListener('click', () => {
+        const maxScroll = scroller.scrollWidth - scroller.clientWidth;
+
+        if (scroller.scrollLeft < maxScroll) {
+            scroller.scrollBy({
+                left: cardWidth,
+                behavior: 'smooth'
+            });
+        }
+    });
+
+    scrollLeftBtn.addEventListener('click', () => {
+        if (scroller.scrollLeft > 0) {
+            scroller.scrollBy({
+                left: -cardWidth,
+                behavior: 'smooth'
+            });
+        }
+    });
+
+    scroller.addEventListener('scroll', updateButtons);
+
+    updateButtons();
+}
 
     // --- Video Uploader ---
     const videoUploadInput = document.getElementById('video-upload');
