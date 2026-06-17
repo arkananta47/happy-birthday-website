@@ -44,13 +44,33 @@ body {
 
 .hidden-content {
     opacity: 0;
-    visibility: hidden;
+    transform: scale(1.03);
+    pointer-events: none;
+    transition: all 2s ease;
 }
 
 .show-content {
     opacity: 1;
-    visibility: visible;
-    transition: opacity 2s ease;
+    transform: scale(1);
+    pointer-events: auto;
+}
+
+#start-screen {
+    position: fixed;
+    inset: 0;
+    background: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 99999;
+    transition:
+        opacity 2s ease,
+        backdrop-filter 2s ease;
+}
+
+#start-screen.fade-out {
+    opacity: 0;
+    backdrop-filter: blur(20px);
 }
 
 @keyframes reveal {
