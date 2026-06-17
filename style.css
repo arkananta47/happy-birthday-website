@@ -13,6 +13,57 @@ body {
 .bg-navy {
     background-color: #2c3e50;
 }
+
+#start-screen {
+    position: fixed;
+    inset: 0;
+    background: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 99999;
+    transition: opacity 1.5s ease;
+}
+
+#start-btn {
+    padding: 20px 50px;
+    font-size: 2rem;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    background: #ff69b4;
+    color: white;
+    font-weight: bold;
+    box-shadow: 0 0 30px rgba(255,105,180,.7);
+    transition: transform .3s;
+}
+
+#start-btn:hover {
+    transform: scale(1.1);
+}
+
+.hidden-content {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.show-content {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 2s ease;
+}
+
+@keyframes reveal {
+    from {
+        opacity: 0;
+        transform: scale(1.05);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
 /* Style for the falling petals canvas */
 #sakura-canvas {
     position: fixed;
@@ -66,3 +117,29 @@ body {
     scrollbar-width: none;  /* Firefox */
 }
 
+#hero-section {
+    background-image: url("img/bg.jpeg");
+    background-size: 95%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+#hero-section::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("img/bg.jpeg");
+    background-size: cover;
+    background-position: center;
+    animation: slowZoom 20s ease-in-out infinite alternate;
+    z-index: -2;
+}
+
+@keyframes slowZoom {
+    from {
+        transform: scale(1);
+    }
+    to {
+        transform: scale(1.1);
+    }
+}

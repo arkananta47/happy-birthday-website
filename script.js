@@ -1,7 +1,30 @@
 document.addEventListener('DOMContentLoaded', function() {
+    
+const startBtn = document.getElementById('start-btn');
+const startScreen = document.getElementById('start-screen');
+const mainContent = document.getElementById('main-content');
+const birthdaySong = document.getElementById('birthdaySong');
+
+startBtn.addEventListener('click', () => {
+
+    // mulai lagu
+    birthdaySong.volume = 0.5;
+    birthdaySong.play();
+
+    // tampilkan website
+    mainContent.classList.remove('hidden-content');
+    mainContent.classList.add('show-content');
+
+    // hilangkan layar hitam
+    startScreen.style.opacity = '0';
+
+    setTimeout(() => {
+        startScreen.style.display = 'none';
+    }, 1500);
+});
 
     // --- Live Age Counter ---
-    const birthDate = new Date('2006-08-14T00:00:00');
+    const birthDate = new Date('2006-06-18T00:00:00+08:00');
     const countdownElement = document.getElementById('countdown');
 
     function updateAge() {
